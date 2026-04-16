@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Poppins, Montserrat } from "next/font/google";
+import { Poppins, Montserrat, Geist } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar"
-import Footer from "@/components/layout/Footer"
+import { cn } from "@/lib/utils";
+import { Toaster } from "react-hot-toast";
+
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -28,11 +30,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${montserrat.variable}`}>
+    <html
+      lang="en"
+      className={cn(
+        poppins.variable,
+        montserrat.variable,
+        "font-sans",
+        geist.variable,
+      )}
+    >
       <body className="min-h-screen flex flex-col antialiased">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              fontFamily: "var(--font-poppins), sans-serif",
+              fontSize: "14px",
+              borderRadius: "10px",
+              padding: "14px 18px",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+            },
+            success: {
+              iconTheme: { primary: "#B88E2F", secondary: "#fff" },
+            },
+            error: {
+              iconTheme: { primary: "#ef4444", secondary: "#fff" },
+            },
+          }}
+        />
       </body>
     </html>
   );

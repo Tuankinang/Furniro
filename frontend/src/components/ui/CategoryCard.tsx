@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { Category } from "@/types";
+import Link from "next/link";
+import { Category } from "@/types/product";
 
 interface CategoryCardProps {
   category: Category;
@@ -7,7 +8,10 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
   return (
-    <div className="flex flex-col items-center gap-[30px] cursor-pointer group">
+    <Link 
+      href={`/shop?category=${category.id}`} 
+      className="flex flex-col items-center gap-[30px] cursor-pointer group"
+    >
       {/* Image */}
       <div className="w-full aspect-square overflow-hidden rounded-sm relative">
         <Image
@@ -22,7 +26,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       <span className="text-xl md:text-[20px] font-semibold text-[#3A3A3A] group-hover:text-[#B88E2F] transition-colors duration-200">
         {category.label}
       </span>
-    </div>
+    </Link>
   );
 };
 

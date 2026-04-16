@@ -1,4 +1,4 @@
-import { Product, Category } from "@/types";
+import { Product, Category } from "@/types/product";
 
 export const categories: Category[] = [
   {
@@ -15,80 +15,6 @@ export const categories: Category[] = [
     id: "bedroom",
     label: "Bedroom",
     image: "/images/categories/bedroom.png",
-  },
-];
-
-export const products: Product[] = [
-  {
-    id: "1",
-    name: "Syltherine",
-    category: "Stylish cafe chair",
-    price: 2500000,
-    originalPrice: 3500000,
-    image: "/images/products/syltherine.png",
-    badge: "Sale",
-    discount: 30,
-  },
-  {
-    id: "2",
-    name: "Leviosa",
-    category: "Stylish cafe chair",
-    price: 2500000,
-    image: "/images/products/leviosa.png",
-  },
-  {
-    id: "3",
-    name: "Lolito",
-    category: "Luxury big sofa",
-    price: 7000000,
-    originalPrice: 14000000,
-    image: "/images/products/lolito.png",
-    badge: "Sale",
-    discount: 50,
-  },
-  {
-    id: "4",
-    name: "Respira",
-    category: "Outdoor bar table and stool",
-    price: 500000,
-    image: "/images/products/respira.png",
-    badge: "New",
-    isNew: true,
-  },
-  {
-    id: "5",
-    name: "Grifo",
-    category: "Night lamp",
-    price: 1500000,
-    image: "/images/products/grifo.png",
-  },
-  {
-    id: "6",
-    name: "Muggo",
-    category: "Small mug",
-    price: 150000,
-    image: "/images/products/muggo.png",
-    badge: "New",
-    isNew: true,
-  },
-  {
-    id: "7",
-    name: "Pingky",
-    category: "Cute bed set",
-    price: 7000000,
-    originalPrice: 14000000,
-    image: "/images/products/pingky.png",
-    badge: "Sale",
-    discount: 50,
-  },
-  {
-    id: "8",
-    name: "Potty",
-    category: "Minimalist flower pot",
-    price: 500000,
-    image: "/images/products/potty.png",
-    badge: "New",
-    isNew: true,
   },
 ];
 

@@ -1,5 +1,5 @@
 import { categories } from "@/lib/data";
-import { Category } from "@/types";
+import { Category } from "@/types/product";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CategoryCard from "@/components/ui/CategoryCard";
 

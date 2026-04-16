@@ -1,20 +1,28 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
+import routes from "./routes";
+import cookieParser from "cookie-parser";
+import { globalErrorHandler } from "./middlewares/error.middleware";
 
 const app = express();
-const port = process.env.PORT || 5000;
 
-app.use(cors());
+// Middleware cơ bản
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
 app.use(express.json());
+app.use(cookieParser());
 
-// Khai báo rõ kiểu cho req và res
-app.get("/", (req: Request, res: Response) => {
-  res.send("Furniro Backend API is running!");
-});
+app.use("/api", routes);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+// Middleware xử lý lỗi tập trung
+app.use(globalErrorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Backend Server đang chạy tại http://localhost:${PORT}`);
 });
