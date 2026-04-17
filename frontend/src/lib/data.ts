@@ -4,17 +4,17 @@ export const categories: Category[] = [
   {
     id: "dining",
     label: "Dining",
-    image: "/images/categories/dining.png",
+    image: "/images/categories/Dining.png",
   },
   {
     id: "living",
     label: "Living",
-    image: "/images/categories/living.png",
+    image: "/images/categories/Living.png",
   },
   {
     id: "bedroom",
     label: "Bedroom",
-    image: "/images/categories/bedroom.png",
+    image: "/images/categories/Bedroom.png",
   },
 ];
 
