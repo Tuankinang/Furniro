@@ -25,9 +25,8 @@ export const listPublishedPosts = catchAsync(
 );
 
 export const getPost = catchAsync(async (req: Request, res: Response) => {
-  const slug =
-    typeof req.params.slug === "string" ? req.params.slug : req.params.slug;
-  const post = await postsService.getPostBySlug(slug);
+  const { slug } = req.params;
+  const post = await postsService.getPostBySlug(slug as string);
   if (!post) {
     res.status(404).json({ success: false, message: "Post not found" });
     return;
@@ -89,19 +88,20 @@ export const createPost = catchAsync(
 );
 
 export const updatePost = catchAsync(async (req: Request, res: Response) => {
-  const post = await postsService.updatePost(req.params.id, req.body);
+  const { id } = req.params;
+  const post = await postsService.updatePost(id as string, req.body);
   res.json({ success: true, data: post });
 });
 
 export const deletePost = catchAsync(async (req: Request, res: Response) => {
-  await postsService.deletePost(req.params.id);
+  const { id } = req.params;
+  await postsService.deletePost(id as string);
   res.json({ success: true, message: "Post deleted" });
 });
 
 export const getPostAdmin = catchAsync(async (req: Request, res: Response) => {
-  const slug =
-    typeof req.params.slug === "string" ? req.params.slug : req.params.slug;
-  const post = await postsService.getPostBySlugAdmin(slug);
+  const { slug } = req.params;
+  const post = await postsService.getPostBySlugAdmin(slug as string);
   if (!post) {
     res.status(404).json({ success: false, message: "Post not found" });
     return;

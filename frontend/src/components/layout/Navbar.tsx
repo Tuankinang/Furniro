@@ -48,7 +48,7 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Handle Search API call (with 500ms debounce)
+  // Xử lý gọi API Tìm kiếm (Có Debounce 500ms)
   useEffect(() => {
     const fetchSearchResults = async () => {
       if (!searchQuery.trim()) {
@@ -57,7 +57,7 @@ const Navbar = () => {
       }
       setIsSearching(true);
       try {
-        // Call API with a small limit for a clean popup display
+        // Gọi API với limit nhỏ để hiển thị popup gọn gàng
         const res = await api.get(`/products?search=${encodeURIComponent(searchQuery)}&limit=5`);
         if (res.data.success) {
           const rawData = res.data.data;
@@ -71,7 +71,7 @@ const Navbar = () => {
       }
     };
 
-    // Wait for user to finish typing (500ms) before calling API
+    // Đợi người dùng gõ xong 500ms mới gọi API
     const timeoutId = setTimeout(fetchSearchResults, 500);
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
@@ -79,7 +79,7 @@ const Navbar = () => {
   useEffect(() => {
     if (user) {
       fetchCart();
-      fetchIds(); // Sync wishlist IDs when logged in
+      fetchIds(); // Sync wishlist ids khi đăng nhập
     } else {
       clearCart();
       clearWishlist();
@@ -136,6 +136,9 @@ const Navbar = () => {
           >
             Contact
           </Link>
+          <Link href="/blog" className="hover:text-[#B88E2F] transition-colors">
+            Blog
+          </Link>
         </nav>
 
         <div className="flex items-center gap-11 text-black">
@@ -150,7 +153,7 @@ const Navbar = () => {
               <Search className="w-7 h-7 stroke-[1.5]" />
             </button>
 
-            {/* Search Dropdown */}
+            {/* Dropdown Tìm kiếm */}
             {showSearch && (
               <div className="absolute top-full right-0 md:right-auto md:-left-40 mt-6 w-[320px] md:w-[400px] bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="p-3 border-b border-gray-100 bg-gray-50/50">
@@ -175,7 +178,7 @@ const Navbar = () => {
                       {searchResults.map((product) => (
                         <Link
                           key={product.id}
-                          // Change this path if your detail page is different (e.g., /shop/${product.slug})
+                          // Thay đổi đường dẫn này nếu trang chi tiết của bạn khác (VD: /shop/${product.slug})
                           href={`/product/${product.slug}`} 
                           onClick={() => {
                             setShowSearch(false);
