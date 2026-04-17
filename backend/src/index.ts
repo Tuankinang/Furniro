@@ -9,10 +9,14 @@ const app = express();
 // Middleware cơ bản
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      process.env.CLIENT_URL as string,
+      "http://localhost:3000"
+    ],
     credentials: true,
-  }),
+  })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 
