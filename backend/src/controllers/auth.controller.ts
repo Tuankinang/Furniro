@@ -10,10 +10,11 @@ export const register = catchAsync(async (req, res) => {
 
 export const login = catchAsync(async (req, res) => {
   const { user, accessToken, refreshToken } = await authService.login(req.body);
+  const isProduction = process.env.NODE_ENV === "production";
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
   const { password, refreshToken: _, ...data } = user;
@@ -32,16 +33,23 @@ export const refreshToken = catchAsync(async (req, res) => {
   const { newAccessToken, newRefreshToken } = await authService.refreshToken(
     req.cookies.refreshToken,
   );
+  const isProduction = process.env.NODE_ENV === "production";
   res.cookie("refreshToken", newRefreshToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "strict",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
   res.status(200).json({ success: true, accessToken: newAccessToken });
 });
 
 export const logout = catchAsync(async (req, res) => {
   await authService.logout(req.cookies.refreshToken);
-  res.clearCookie("refreshToken");
+  const isProduction = process.env.NODE_ENV === "production";
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+  });
   res.status(200).json({ success: true, message: "Đã đăng xuất" });
 });
